@@ -47,6 +47,7 @@ export const providers: Record<SupportedProviders, ProviderInfo> = {
       const url = new URL('/data/pricemultifull', 'https://min-api.cryptocompare.com/');
       url.searchParams.append('fsyms', crypto.join(','));
       url.searchParams.append('tsyms', 'MXN');
+      url.searchParams.append('api_key', 'af0ad623ed82b7b32b8d9ec3ddf45c0ebbddcd46b6cdeaf934a5f149ecd3a2c8');
 
       const request = await fetch(url.toString());
       const response: CryptoCompareResponse = await request.json();
@@ -55,8 +56,8 @@ export const providers: Record<SupportedProviders, ProviderInfo> = {
         (acc, curr) => ({
           ...acc,
           [curr]: {
-            date: response.RAW[curr].LASTUPDATE,
-            pricePerUnit: response.RAW[curr].PRICE,
+            date: response.RAW[curr].MXN.LASTUPDATE * 1000,
+            pricePerUnit: response.RAW[curr].MXN.PRICE,
           },
         }),
         {} as ProviderReturn,

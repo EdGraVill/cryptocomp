@@ -19,11 +19,12 @@ const Comparator: VoidFunctionComponent = () => {
   }, [isLogged]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const requestUpdate = () =>
       supportedProviders.forEach((provider) => {
         dispatch(cryptoActions.requestUpdate(provider));
       });
-    }, 15_000);
+    const interval = setInterval(requestUpdate, 15_000);
+    requestUpdate();
 
     return () => {
       clearInterval(interval);
