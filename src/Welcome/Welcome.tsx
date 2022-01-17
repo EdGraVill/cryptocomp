@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { accountActions, isLoggedSelector } from './store';
+import { accountActions, isLoggedSelector } from '../store';
+import { Button, Container, Input, Label, NameContainer, Subtitle, Title } from './UI';
 
 const Welcome: VoidFunctionComponent = () => {
   const dispatch = useDispatch();
@@ -37,16 +38,29 @@ const Welcome: VoidFunctionComponent = () => {
   );
 
   return (
-    <div>
-      <h1>Welcome!</h1>
-      <div>
-        <input onChange={setInputField('firstName')} value={userDetails.firstName} />
-        <input onChange={setInputField('lastName')} value={userDetails.lastName} />
-      </div>
-      <input onChange={setInputField('email')} value={userDetails.email} />
-      <input onChange={setInputField('phoneNumber')} value={userDetails.phoneNumber} />
-      <button onClick={onLogin(userDetails)}>Submit</button>
-    </div>
+    <Container>
+      <Title>Welcome!</Title>
+      <NameContainer>
+        <Subtitle>Name</Subtitle>
+        <Label sub>
+          <Input onChange={setInputField('firstName')} value={userDetails.firstName} />
+          First
+        </Label>
+        <Label sub>
+          <Input onChange={setInputField('lastName')} value={userDetails.lastName} />
+          Last
+        </Label>
+      </NameContainer>
+      <Label>
+        Email
+        <Input onChange={setInputField('email')} value={userDetails.email} />
+      </Label>
+      <Label>
+        Phone Number
+        <Input onChange={setInputField('phoneNumber')} value={userDetails.phoneNumber} />
+      </Label>
+      <Button onClick={onLogin(userDetails)}>Submit</Button>
+    </Container>
   );
 };
 
